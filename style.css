@@ -11,6 +11,7 @@
   --line: #D9D7CE;
   --glacier: #4F7180;
   --alpenglow: #B97E86;
+  --coral: #FF5A3C;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -70,7 +71,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: var(--nav-h);
   padding: 0 var(--gutter);
   background: rgba(247, 246, 242, 0.86);
@@ -78,16 +79,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-bottom: 1px solid var(--line);
 }
 
+/* Home page: floats transparently over the full-bleed slider */
+.site-nav--overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0));
+  backdrop-filter: none;
+  border-bottom: none;
+}
+.site-nav--overlay .nav-mark { color: #fff; }
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+
 .nav-mark {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 0.02em;
 }
 
 .nav-links {
   display: flex;
-  gap: clamp(16px, 3vw, 40px);
+  gap: clamp(16px, 3vw, 36px);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -100,13 +117,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .nav-links a {
   position: relative;
   padding-bottom: 4px;
+  color: var(--coral);
 }
 .nav-links a::after {
   content: "";
   position: absolute;
   left: 0; bottom: 0;
   width: 0; height: 1px;
-  background: var(--ink);
+  background: var(--coral);
   transition: width 0.25s ease;
 }
 .nav-links a:hover::after,
@@ -114,6 +132,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .nav-toggle {
   display: none;
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
@@ -126,6 +148,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--ink);
   margin: 5px 0;
 }
+.site-nav--overlay .nav-toggle span { background: #fff; }
 
 @media (max-width: 720px) {
   .nav-toggle { display: block; }
@@ -140,6 +163,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 150;
   }
   .nav-links.is-open {
     opacity: 1;
@@ -151,6 +175,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     padding: 16px 0;
     border-bottom: 1px solid var(--line);
     font-size: 14px;
+    color: var(--ink);
   }
 }
 
@@ -168,6 +193,73 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 0 var(--gutter);
   margin: clamp(48px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
 }
+
+/* ============================================================
+   Full-bleed hero slider (home page)
+   ============================================================ */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-slider .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.hero-slider .slide.is-active { opacity: 1; }
+.hero-slider .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+.slider-arrow:hover { opacity: 1; }
+.slider-arrow svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.slider-arrow.prev { left: clamp(4px, 2vw, 28px); }
+.slider-arrow.next { right: clamp(4px, 2vw, 28px); }
+
+.slider-dots {
+  position: absolute;
+  bottom: clamp(20px, 4vw, 36px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+}
+.slider-dots button {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.slider-dots button.is-active { background: #fff; transform: scale(1.3); }
 
 /* ============================================================
    Hero

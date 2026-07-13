@@ -87,16 +87,81 @@ function renderVideos(container, videos) {
   });
 }
 
+// ---- full-bleed hero slider ----
+function initSlider(container, photos) {
+  let current = 0;
+  let timer = null;
+
+  container.innerHTML = '';
+  const slidesWrap = document.createElement('div');
+  photos.forEach((p, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' is-active' : '');
+    slide.innerHTML = `<img src="${p.src}" alt="${p.alt || ''}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+    slidesWrap.appendChild(slide);
+  });
+  container.appendChild(slidesWrap);
+
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'slider-arrow prev';
+  prevBtn.setAttribute('aria-label', 'Previous photo');
+  prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'slider-arrow next';
+  nextBtn.setAttribute('aria-label', 'Next photo');
+  nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+
+  const dots = document.createElement('div');
+  dots.className = 'slider-dots';
+  photos.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+    if (i === 0) dot.classList.add('is-active');
+    dot.addEventListener('click', () => goTo(i));
+    dots.appendChild(dot);
+  });
+
+  container.appendChild(prevBtn);
+  container.appendChild(nextBtn);
+  container.appendChild(dots);
+
+  const slideEls = () => container.querySelectorAll('.slide');
+  const dotEls = () => dots.querySelectorAll('button');
+
+  function goTo(i) {
+    current = (i + photos.length) % photos.length;
+    slideEls().forEach((s, idx) => s.classList.toggle('is-active', idx === current));
+    dotEls().forEach((d, idx) => d.classList.toggle('is-active', idx === current));
+    resetTimer();
+  }
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, 6000);
+  }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+  resetTimer();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   const lightbox = buildLightbox();
 
-  // Home hero grid
-  const heroGrid = document.querySelector('[data-gallery="hero"]');
-  if (heroGrid) {
+  // Home full-bleed slider
+  const heroSlider = document.querySelector('[data-slider="hero"]');
+  if (heroSlider) {
     fetch('photos.json')
       .then(r => r.json())
-      .then(data => renderGallery(heroGrid, data.hero, lightbox));
+      .then(data => initSlider(heroSlider, data.hero));
   }
 
   // Works page: photography categories + video list

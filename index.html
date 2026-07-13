@@ -12,17 +12,21 @@
 </head>
 <body>
 
-<header class="site-nav">
-  <a href="index.html" class="nav-mark">MOVUK</a>
+<header class="site-nav site-nav--overlay">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-mark">MOVUK</a>
+    <ul class="nav-links">
+      <li><a href="works.html">Works</a></li>
+      <li><a href="about.html">About me</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
   <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  <ul class="nav-links">
-    <li><a href="works.html">Works</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
 </header>
 
 <main>
+  <div class="hero-slider" data-slider="hero" aria-label="Featured work slideshow"></div>
+
   <section class="hero">
     <p class="eyebrow">Creative Portfolio</p>
     <h1>Photography &amp; videography across landscapes, culture, and the mountains between.</h1>
@@ -37,8 +41,6 @@
       <path d="M0 11 C 100 2, 200 20, 300 11 S 500 2, 600 11 S 800 20, 900 11 S 1100 2, 1200 11" fill="none" stroke="currentColor" stroke-width="1"/>
     </svg>
   </div>
-
-  <section class="gallery" data-gallery="hero" aria-label="Featured work"></section>
 </main>
 
 <footer class="site-footer">
