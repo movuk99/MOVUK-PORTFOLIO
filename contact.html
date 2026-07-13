@@ -37,33 +37,38 @@
 
 <main>
   <div class="contact-wrap">
-    <p class="eyebrow">Contact</p>
-    <h1>Let's create something together.</h1>
-    <p>If you're interested in collaborating, working together, or have any inquiries, don't hesitate to get in touch. I'm always open to new conversations and creative opportunities.</p>
+    <div class="contact-intro">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's create something together.</h1>
+      <p>If you're interested in collaborating, working together, or have any inquiries, don't hesitate to get in touch. I'm always open to new conversations and creative opportunities.</p>
+    </div>
 
-    <!--
-      This form posts to Formspree (free tier, no backend needed).
-      1. Create a free account at https://formspree.io
-      2. Create a new form, copy your form ID
-      3. Replace YOUR_FORM_ID below with that ID
-      Until then, the form falls back to a mailto: link — see README.md.
-    -->
-    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <div class="field">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="field">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-      </div>
-      <button type="submit" class="btn">Send message</button>
-      <p class="form-note" id="formNote"></p>
-    </form>
+    <div class="contact-form-wrap">
+      <!--
+        Connected to Formspree (form ID: mzdnbqbw).
+        Make sure both notification emails are linked in the Formspree
+        dashboard under this form's settings:
+          - mmarcin.ieu2024@student.ie.edu
+          - matiasmarcin@yahoo.com
+        (each has to be verified via the confirmation email Formspree sends).
+      -->
+      <form class="contact-form" action="https://formspree.io/f/mzdnbqbw" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
   </div>
 </main>
 
@@ -97,12 +102,6 @@
   const form = document.querySelector('.contact-form');
   const note = document.getElementById('formNote');
   form.addEventListener('submit', async (e) => {
-    if (form.action.includes('YOUR_FORM_ID')) {
-      e.preventDefault();
-      note.textContent = 'Form not connected yet — see README.md to set up Formspree (2 minutes, free).';
-      note.classList.add('is-visible');
-      return;
-    }
     e.preventDefault();
     note.textContent = 'Sending…';
     note.classList.add('is-visible');

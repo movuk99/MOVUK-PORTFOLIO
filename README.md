@@ -101,13 +101,18 @@ El `id` es lo que aparece después de `v=` en la URL del video.
 ```
 Sube el `.mp4` (y opcionalmente una imagen de portada) a la raíz del repo junto con los demás archivos, y usa esos nombres de archivo en `id` y `thumbnail`.
 
-## Activar el formulario de contacto
+## Formulario de contacto
 
-El formulario en `contact.html` está listo para [Formspree](https://formspree.io) (gratis hasta 50 envíos/mes, sin backend):
+Ya está conectado a tu formulario de Formspree (`mzdnbqbw`). Lo único que falta de tu lado:
 
-1. Crea una cuenta gratuita en formspree.io y un formulario nuevo.
-2. Copia el ID que te dan (algo como `xzbqrkyz`).
-3. En `contact.html`, reemplaza `YOUR_FORM_ID` en la línea `action="https://formspree.io/f/YOUR_FORM_ID"` por ese ID.
+1. Entra al dashboard de [formspree.io](https://formspree.io) → tu formulario → configuración de correos.
+2. Confirma que **ambos** correos estén agregados y verificados:
+   - `mmarcin.ieu2024@student.ie.edu`
+   - `matiasmarcin@yahoo.com`
+   
+   Formspree manda un email de verificación a cada uno — si no lo confirmas, no te llegan los mensajes a esa cuenta.
+
+Con el plan gratis tienes 50 envíos al mes, más que suficiente para un portafolio personal.
 
 ## Estructura del proyecto
 
