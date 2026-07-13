@@ -27,6 +27,14 @@ Todos los archivos viven sueltos en la raíz del repo (sin subcarpetas), para qu
 
 Cada vez que reemplaces un archivo desde la web de GitHub, el sitio se actualiza solo en 1–2 minutos.
 
+## Agregar lugares nuevos (sección "Places I've worked at" en About)
+
+Vive en `places.json`. Cada entrada es una foto + su ubicación:
+```json
+{ "src": "mi-foto.jpg", "location": "Ciudad, País" }
+```
+Sube la foto a la raíz del repo, agrega la entrada al arreglo, guarda. El mosaico se acomoda solo (masonry), y al pasar el mouse sobre cualquier foto se oscurece y muestra el nombre del lugar.
+
 ## Agregar fotos nuevas
 
 No hace falta tocar HTML. Todo el contenido de las galerías vive en `photos.json`.
@@ -106,14 +114,17 @@ El formulario en `contact.html` está listo para [Formspree](https://formspree.i
 ```
 movuk-portfolio/
 ├── index.html        → Home (slider a pantalla completa)
-├── works.html         → Videografía (slider) + fotografía (grid)
-├── about.html          → Bio
+├── works.html         → Videografía (slider) + fotografía (grid 3x3)
+├── about.html          → Bio + mosaico de lugares + posiciones actuales
 ├── contact.html          → Formulario de contacto
 ├── style.css               → Todos los estilos
-├── main.js                  → Nav, slider home, galerías, video slider, lightbox
-├── photos.json                → Contenido de las galerías (editable)
+├── main.js                  → Nav, sliders, galerías, mosaico, lightbox
+├── photos.json                → Contenido de Works (editable)
 ├── videos.json                  → Lista de videos (editable)
-└── logo.png                       → Logo MOVUK usado en nav y footer
+├── places.json                    → Mosaico "Places I've worked at" (editable)
+├── logo.png                        → Logo MOVUK usado en nav y footer
+├── about-portrait.jpg                → Foto principal de About
+└── place-*.jpg                        → Fotos del mosaico de lugares
 ```
 
 ## Notas de diseño

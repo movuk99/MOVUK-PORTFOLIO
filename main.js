@@ -257,6 +257,19 @@ function initSlider(container, photos) {
   resetTimer();
 }
 
+// ---- render the "Places I've worked at" hover mosaic ----
+function renderPlaces(container, places) {
+  places.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'place-item';
+    item.innerHTML = `
+      <img src="${p.src}" alt="${p.location}" loading="lazy">
+      <div class="place-overlay"><span>${p.location}</span></div>
+    `;
+    container.appendChild(item);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   const lightbox = buildLightbox();
@@ -297,5 +310,13 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('videos.json')
       .then(r => r.json())
       .then(videos => renderVideoSlider(worksVideos, videos));
+  }
+
+  // About page: places mosaic
+  const placesGrid = document.querySelector('[data-places]');
+  if (placesGrid) {
+    fetch('places.json')
+      .then(r => r.json())
+      .then(places => renderPlaces(placesGrid, places));
   }
 });

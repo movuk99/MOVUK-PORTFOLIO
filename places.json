@@ -1,0 +1,11 @@
+[
+  { "src": "place-pyrenees.jpg", "location": "Pyrenees" },
+  { "src": "place-tanzania.jpg", "location": "Tanzania, Africa" },
+  { "src": "place-canary-islands.jpg", "location": "Canary Islands, Spain" },
+  { "src": "place-morocco.jpg", "location": "Morocco" },
+  { "src": "place-shanghai.jpg", "location": "Shanghai, China" },
+  { "src": "place-thailand.jpg", "location": "Thailand" },
+  { "src": "place-philippines.jpg", "location": "Philippines" },
+  { "src": "place-yosemite.jpg", "location": "Yosemite, USA" },
+  { "src": "place-spain.jpg", "location": "Spain" }
+]
