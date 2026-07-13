@@ -66,25 +66,63 @@ function renderGallery(container, photos, lightbox, categoryLabel) {
   });
 }
 
-// ---- render video cards ----
-function renderVideos(container, videos) {
-  videos.forEach(v => {
-    const card = document.createElement('div');
-    card.className = 'video-card';
-    card.innerHTML = `
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/${v.youtubeId}" title="${v.title}"
-          loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-      <div class="video-meta">
-        <h3>${v.title}</h3>
-        <p>${v.description}</p>
-        <span class="video-tag">${v.tag}</span>
-      </div>
-    `;
-    container.appendChild(card);
+// ---- video slider: paged, with click-to-embed thumbnails ----
+function renderVideoSlider(container, videos) {
+  const perPage = 3;
+  const pages = [];
+  for (let i = 0; i < videos.length; i += perPage) pages.push(videos.slice(i, i + perPage));
+
+  const clip = document.createElement('div');
+  clip.className = 'video-clip';
+  const pagesWrap = document.createElement('div');
+  pagesWrap.className = 'video-pages';
+
+  pages.forEach(pageVideos => {
+    const page = document.createElement('div');
+    page.className = 'video-page';
+    pageVideos.forEach(v => {
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <div class="video-thumb" data-yt="${v.youtubeId}">
+          <img src="https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+          <button class="play-btn" aria-label="Play ${v.title}">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="video-meta">
+          <h3>${v.title}</h3>
+          <p>${v.description}</p>
+          <span class="video-tag">${v.tag}</span>
+        </div>
+      `;
+      const thumb = card.querySelector('.video-thumb');
+      thumb.addEventListener('click', () => {
+        thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1" title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      });
+      page.appendChild(card);
+    });
+    pagesWrap.appendChild(page);
   });
+
+  container.appendChild(clip);
+  clip.appendChild(pagesWrap);
+
+  if (pages.length > 1) {
+    const dots = document.createElement('div');
+    dots.className = 'video-dots';
+    pages.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', `Page ${i + 1}`);
+      if (i === 0) dot.classList.add('is-active');
+      dot.addEventListener('click', () => {
+        pagesWrap.style.transform = `translateX(-${i * 100}%)`;
+        dots.querySelectorAll('button').forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+      });
+      dots.appendChild(dot);
+    });
+    container.appendChild(dots);
+  }
 }
 
 // ---- full-bleed hero slider ----
@@ -191,6 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (worksVideos) {
     fetch('videos.json')
       .then(r => r.json())
-      .then(videos => renderVideos(worksVideos, videos));
+      .then(videos => renderVideoSlider(worksVideos, videos));
   }
 });

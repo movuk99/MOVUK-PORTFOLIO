@@ -96,10 +96,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .nav-mark {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.02em;
+  display: block;
+  line-height: 0;
+}
+.nav-logo {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -289,28 +292,30 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
    Masonry gallery (CSS columns)
    ============================================================ */
 .gallery {
-  column-count: 1;
-  column-gap: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
   padding: 0 var(--gutter) clamp(40px, 6vw, 72px);
 }
 .gallery figure {
-  margin: 0 0 14px;
-  break-inside: avoid;
+  margin: 0;
   position: relative;
   overflow: hidden;
   background: var(--paper-alt);
   cursor: zoom-in;
+  aspect-ratio: 1 / 1;
 }
 .gallery img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform 0.5s ease, filter 0.5s ease;
 }
-.gallery figure:hover img { transform: scale(1.035); }
+.gallery figure:hover img { transform: scale(1.045); }
 
-@media (min-width: 620px) { .gallery { column-count: 2; } }
-@media (min-width: 980px) { .gallery { column-count: 3; } }
+@media (min-width: 620px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
 
 /* category header inside works page */
 .cat-header {
@@ -325,42 +330,69 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .cat-header .rule { flex: 1; height: 1px; background: var(--line); }
 
 /* ============================================================
-   Video list (works — videography)
+   Video slider (works — videography)
    ============================================================ */
-.video-list {
-  padding: 0 var(--gutter);
-  display: grid;
-  gap: clamp(28px, 5vw, 48px);
+.section-label {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: var(--stone);
+  margin: 0 0 clamp(28px, 5vw, 48px);
 }
-.video-card {
+
+.video-pager { padding: 0 var(--gutter); }
+.video-clip { overflow: hidden; }
+.video-pages {
+  display: flex;
+  transition: transform 0.45s ease;
+}
+.video-page {
+  flex: 0 0 100%;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-  border-top: 1px solid var(--line);
-  padding-top: clamp(20px, 3vw, 28px);
+  gap: clamp(28px, 4vw, 40px);
 }
-.video-card .video-embed {
+@media (min-width: 700px) { .video-page { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .video-page { grid-template-columns: repeat(3, 1fr); } }
+
+.video-card { display: flex; flex-direction: column; gap: 16px; }
+.video-thumb {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
+  aspect-ratio: 16 / 9;
   background: var(--ink);
   overflow: hidden;
+  cursor: pointer;
 }
-.video-card .video-embed iframe {
-  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+.video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.video-thumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-thumb .play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(21,23,26,0.55);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-.video-card .video-meta h3 {
-  font-size: clamp(20px, 2.6vw, 26px);
-}
-.video-card .video-meta p {
+.video-thumb:hover .play-btn { background: var(--coral); transform: translate(-50%, -50%) scale(1.08); }
+.video-thumb .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+
+.video-meta h3 { font-size: 20px; }
+.video-meta p {
   margin: 8px 0 0;
   color: var(--stone);
   font-size: 14.5px;
-  max-width: 60ch;
 }
-.video-card .video-tag {
+.video-meta .video-tag {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -368,9 +400,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   text-transform: uppercase;
 }
 
-@media (min-width: 860px) {
-  .video-card { grid-template-columns: 1.4fr 1fr; align-items: center; gap: 40px; }
+.video-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: clamp(28px, 4vw, 40px) 0 0;
 }
+.video-dots button {
+  width: 9px; height: 9px;
+  border: none;
+  background: var(--line);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+.video-dots button.is-active { background: var(--ink); }
 
 /* ============================================================
    About
@@ -482,18 +526,44 @@ form.contact-form { display: grid; gap: 22px; }
    Footer
    ============================================================ */
 .site-footer {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
   border-top: 1px solid var(--line);
-  padding: 32px var(--gutter) 48px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--stone);
+  padding: clamp(48px, 7vw, 88px) var(--gutter) 56px;
 }
-.site-footer a:hover { color: var(--ink); }
-.footer-socials { display: flex; gap: 20px; }
+.footer-logo img {
+  width: clamp(90px, 9vw, 150px);
+  height: auto;
+}
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+}
+.footer-col a,
+.footer-col p {
+  display: block;
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 15px;
+}
+.footer-col a { transition: color 0.2s ease; }
+.footer-col a:hover { color: var(--coral); }
+.footer-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.footer-icons img { width: 22px; height: 22px; }
+
+@media (max-width: 720px) {
+  .site-footer { grid-template-columns: 1fr; gap: 36px; }
+}
 
 /* ============================================================
    Lightbox
