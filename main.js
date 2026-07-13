@@ -270,53 +270,105 @@ function renderPlaces(container, places) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// ---- utilities: shuffle, image-load tracking, page loader ----
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function waitForImages() {
+  const imgs = Array.from(document.images);
+  return Promise.all(imgs.map(img => {
+    if (img.complete) return Promise.resolve();
+    return new Promise(resolve => {
+      img.addEventListener('load', resolve, { once: true });
+      img.addEventListener('error', resolve, { once: true });
+    });
+  }));
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function hidePageLoader() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  loader.classList.add('is-hidden');
+  setTimeout(() => loader.remove(), 600);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   const lightbox = buildLightbox();
 
-  // Home full-bleed slider
+  const tasks = [];
+
+  // Home full-bleed slider — random order each visit
   const heroSlider = document.querySelector('[data-slider="hero"]');
   if (heroSlider) {
-    fetch('photos.json')
-      .then(r => r.json())
-      .then(data => initSlider(heroSlider, data.hero));
+    tasks.push(
+      fetch('photos.json')
+        .then(r => r.json())
+        .then(data => initSlider(heroSlider, shuffle(data.hero.slice())))
+    );
   }
 
-  // Works page: photography categories + video list
+  // Works page: photography categories + video slider
   const worksPhotos = document.querySelector('[data-works="photography"]');
   const worksVideos = document.querySelector('[data-works="videography"]');
   if (worksPhotos) {
-    fetch('photos.json')
-      .then(r => r.json())
-      .then(data => {
-        data.categories.forEach((cat, i) => {
-          const header = document.createElement('div');
-          header.className = 'cat-header';
-          header.innerHTML = `
-            <span class="cat-index">${String(i + 1).padStart(2, '0')} / ${String(data.categories.length).padStart(2, '0')}</span>
-            <h2>${cat.name}</h2>
-            <span class="rule"></span>
-          `;
-          worksPhotos.appendChild(header);
+    tasks.push(
+      fetch('photos.json')
+        .then(r => r.json())
+        .then(data => {
+          data.categories.forEach((cat, i) => {
+            const header = document.createElement('div');
+            header.className = 'cat-header';
+            header.innerHTML = `
+              <span class="cat-index">${String(i + 1).padStart(2, '0')} / ${String(data.categories.length).padStart(2, '0')}</span>
+              <h2>${cat.name}</h2>
+              <span class="rule"></span>
+            `;
+            worksPhotos.appendChild(header);
 
-          const grid = document.createElement('div');
-          grid.className = 'gallery';
-          worksPhotos.appendChild(grid);
-          renderSlotGrid(grid, cat.slots, lightbox, cat.name);
-        });
-      });
+            const grid = document.createElement('div');
+            grid.className = 'gallery';
+            worksPhotos.appendChild(grid);
+            renderSlotGrid(grid, cat.slots, lightbox, cat.name);
+          });
+        })
+    );
   }
   if (worksVideos) {
-    fetch('videos.json')
-      .then(r => r.json())
-      .then(videos => renderVideoSlider(worksVideos, videos));
+    tasks.push(
+      fetch('videos.json')
+        .then(r => r.json())
+        .then(videos => renderVideoSlider(worksVideos, videos))
+    );
   }
 
   // About page: places mosaic
   const placesGrid = document.querySelector('[data-places]');
   if (placesGrid) {
-    fetch('places.json')
-      .then(r => r.json())
-      .then(places => renderPlaces(placesGrid, places));
+    tasks.push(
+      fetch('places.json')
+        .then(r => r.json())
+        .then(places => renderPlaces(placesGrid, places))
+    );
   }
+
+  // Wait for all dynamic content to render, then for every image (static +
+  // dynamic) and web fonts to finish, with a safety timeout so a slow
+  // network never leaves the loader stuck forever.
+  const readyPromise = Promise.all(tasks)
+    .then(waitForImages)
+    .then(() => (document.fonts && document.fonts.ready ? document.fonts.ready : null))
+    .then(() => wait(350)); // small floor so the loader never just flashes
+
+  await Promise.race([readyPromise, wait(8000)]);
+  hidePageLoader();
 });
