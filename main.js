@@ -49,20 +49,69 @@ function buildLightbox() {
   return { open };
 }
 
-// ---- render a masonry gallery from a photo array into a container ----
-function renderGallery(container, photos, lightbox, categoryLabel) {
-  photos.forEach(p => {
-    const fig = document.createElement('figure');
-    const img = document.createElement('img');
-    img.src = p.src;
-    img.alt = p.alt || '';
-    img.loading = 'lazy';
-    fig.appendChild(img);
-    fig.addEventListener('click', () => {
-      const tag = categoryLabel ? `${categoryLabel} — ${p.alt}` : p.alt;
-      lightbox.open(p.src, p.alt, tag);
+// ---- render a fixed 3x3 grid of slots; each slot may hold 1+ photos (mini-slideshow) ----
+function renderSlotGrid(container, slots, lightbox, categoryLabel) {
+  slots.forEach(slot => {
+    const cell = document.createElement('div');
+    cell.className = 'grid-cell';
+
+    if (!slot.photos || slot.photos.length === 0) {
+      cell.classList.add('is-empty');
+      container.appendChild(cell);
+      return;
+    }
+
+    const photos = slot.photos;
+    let idx = 0;
+
+    const imgEl = document.createElement('img');
+    imgEl.src = photos[0].src;
+    imgEl.alt = photos[0].alt || '';
+    imgEl.loading = 'lazy';
+    cell.appendChild(imgEl);
+
+    function show(i) {
+      idx = (i + photos.length) % photos.length;
+      imgEl.src = photos[idx].src;
+      imgEl.alt = photos[idx].alt || '';
+      if (dotsEl) {
+        dotsEl.querySelectorAll('span').forEach((d, di) => d.classList.toggle('is-active', di === idx));
+      }
+    }
+
+    cell.addEventListener('click', () => {
+      const tag = categoryLabel ? `${categoryLabel} — ${photos[idx].alt}` : photos[idx].alt;
+      lightbox.open(photos[idx].src, photos[idx].alt, tag);
     });
-    container.appendChild(fig);
+
+    let dotsEl = null;
+    if (photos.length > 1) {
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'cell-arrow prev';
+      prevBtn.setAttribute('aria-label', 'Previous photo in this set');
+      prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'cell-arrow next';
+      nextBtn.setAttribute('aria-label', 'Next photo in this set');
+      nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+
+      dotsEl = document.createElement('div');
+      dotsEl.className = 'cell-dots';
+      photos.forEach((_, di) => {
+        const dot = document.createElement('span');
+        if (di === 0) dot.classList.add('is-active');
+        dotsEl.appendChild(dot);
+      });
+
+      cell.appendChild(prevBtn);
+      cell.appendChild(nextBtn);
+      cell.appendChild(dotsEl);
+    }
+
+    container.appendChild(cell);
   });
 }
 
@@ -222,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const grid = document.createElement('div');
           grid.className = 'gallery';
           worksPhotos.appendChild(grid);
-          renderGallery(grid, cat.photos, lightbox, cat.name);
+          renderSlotGrid(grid, cat.slots, lightbox, cat.name);
         });
       });
   }

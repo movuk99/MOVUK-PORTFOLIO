@@ -31,12 +31,25 @@ Cada vez que reemplaces un archivo desde la web de GitHub, el sitio se actualiza
 
 No hace falta tocar HTML. Todo el contenido de las galerías vive en `photos.json`.
 
+Cada categoría en Works tiene exactamente **9 casillas** (grid 3×3). Cada casilla puede tener una foto, varias fotos (se vuelve un mini-slideshow con flechas), o ninguna (queda vacía, marcada con un `+` sutil).
+
 1. Sube tu imagen nueva a la raíz del repo (o usa un servicio externo gratis como imgbb.com y pega esa URL — así el repo no se llena de archivos pesados).
-2. Abre `photos.json` (botón de lápiz para editar directo en github.com) y agrega una entrada dentro de la categoría que corresponda:
+2. Abre `photos.json` (botón de lápiz para editar directo en github.com).
+3. Busca la categoría (`Outdoors Photography`, `Film Photography`, `Culture and Travel`, `Others`) y encuentra una casilla vacía: `{ "photos": [] }`.
+4. Agrega tu foto dentro de ese arreglo:
    ```json
-   { "src": "foto-nueva.jpg", "alt": "Descripción corta de la foto" }
+   { "photos": [ { "src": "foto-nueva.jpg", "alt": "Descripción corta de la foto" } ] }
    ```
-3. Guarda ("Commit changes"). Listo, se actualiza solo.
+   Para que esa misma casilla sea un mini-slideshow, agrega más de una foto al arreglo:
+   ```json
+   { "photos": [
+       { "src": "foto-1.jpg", "alt": "Descripción 1" },
+       { "src": "foto-2.jpg", "alt": "Descripción 2" }
+   ] }
+   ```
+5. Guarda ("Commit changes"). Listo, se actualiza solo.
+
+> Si quieres agregar una categoría nueva, copia la estructura completa de una existente (nombre + 9 casillas) dentro del arreglo `categories`.
 
 Para agregar un video nuevo, edita `videos.json` de la misma forma (solo necesitas el ID de YouTube, el que aparece después de `v=` en la URL del video). El slider de videos agrupa automáticamente de a 3 por página.
 
