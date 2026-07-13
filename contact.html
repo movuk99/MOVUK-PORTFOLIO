@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — MOVUK</title>
+<meta name="description" content="Get in touch with MOVUK for collaborations and creative opportunities.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-mark">MOVUK</a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li><a href="works.html">Works</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" aria-current="page">Contact</a></li>
+  </ul>
+</header>
+
+<main>
+  <div class="contact-wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's create something together.</h1>
+    <p>If you're interested in collaborating, working together, or have any inquiries, don't hesitate to get in touch. I'm always open to new conversations and creative opportunities.</p>
+
+    <!--
+      This form posts to Formspree (free tier, no backend needed).
+      1. Create a free account at https://formspree.io
+      2. Create a new form, copy your form ID
+      3. Replace YOUR_FORM_ID below with that ID
+      Until then, the form falls back to a mailto: link — see README.md.
+    -->
+    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn">Send message</button>
+      <p class="form-note" id="formNote"></p>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>MOVUK — Matías Marcin</span>
+  <span>Madrid, Spain · Mexico City, Mexico</span>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/mmovuk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/in/matias-marcin-01139b333/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const form = document.querySelector('.contact-form');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', async (e) => {
+    if (form.action.includes('YOUR_FORM_ID')) {
+      e.preventDefault();
+      note.textContent = 'Form not connected yet — see README.md to set up Formspree (2 minutes, free).';
+      note.classList.add('is-visible');
+      return;
+    }
+    e.preventDefault();
+    note.textContent = 'Sending…';
+    note.classList.add('is-visible');
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      note.textContent = res.ok
+        ? 'Thank you — your message has been sent.'
+        : 'Something went wrong. Please try again.';
+      if (res.ok) form.reset();
+    } catch {
+      note.textContent = 'Something went wrong. Please try again.';
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "hero": [
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413e5170d58979f4d1c10e_IMG_8141%202-min.jpg", "alt": "Two men in traditional Maasai clothing on a hillside overlooking a valley" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/692f2ffdcf340076874556af_IMG_6728.JPG", "alt": "Snow-covered rocky mountain ridge under a cloudy sky" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413859b9488273628cc79d_DSC07414-2.jpeg", "alt": "Granite dome lit by pink sunset light" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/694139f866604e4b20f94619_DSC00872%203-min.JPG", "alt": "Two women standing in water near a forested shoreline" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a2bee4a7285647d800b_IMG_6735-2.jpeg", "alt": "Sunset over a rocky volcanic crater with lens flare" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a4bd29540a39a3bb803_COOL.JPG", "alt": "Three hikers on a rocky trail toward a mountain lake" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a6571b0c382ba0da8db_IMG_8149-min.jpg", "alt": "Black and white landscape of hilly terrain" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a843c19ab5e380436f3_DSC00743-min.jpeg", "alt": "A cat resting in front of a shop of traditional instruments" },
+    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a9b3f6f1d1e65467823_IMG_1493.JPG", "alt": "Two people walking a dirt path through a flowering hillside" }
+  ],
+  "categories": [
+    {
+      "name": "Ngoro Ngoro",
+      "photos": [
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413326c0db77d198472600_IMG_8141.jpg", "alt": "Two men in Maasai clothing with walking sticks in a mountainous landscape" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a6571b0c382ba0da8db_IMG_8149-min.jpg", "alt": "Black and white hilly terrain with scattered trees" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941e9349e039fc357788494_IMG_8064%202.jpg", "alt": "Two giraffes standing with necks crossed" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941e95043ff3fceb922b1a0_IMG_8173.jpg", "alt": "White stork standing in shallow water" }
+      ]
+    },
+    {
+      "name": "Film",
+      "photos": [
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a2bee4a7285647d800b_IMG_6735-2.jpeg", "alt": "Sunset over a rocky crater with lens flare" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413e97b3c88e0dd4b242b7_IMG_6740-2.jpeg", "alt": "Children standing outdoors in front of Mount Kilimanjaro at dusk" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/692f2ffdcf340076874556af_IMG_6728.JPG", "alt": "Snow-covered rocky mountain ridge" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f122de3910fc47fa08e0_IMG_6741.JPG", "alt": "A man in traditional Maasai clothing in a village of thatched huts" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a9b3f6f1d1e65467823_IMG_1493.JPG", "alt": "Two people walking a dirt path through a flowering hillside" }
+      ]
+    },
+    {
+      "name": "Outdoors",
+      "photos": [
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413859b9488273628cc79d_DSC07414-2.jpeg", "alt": "Granite dome lit by pink sunset light" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/694135796e8ba77ab47cb567_DSC00853.JPG", "alt": "Hikers by a mountain lake with sunlight on the water" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f255d32b500b75d7acb4_DSC07419%202.jpeg", "alt": "Dark mountain silhouette under a twilight sky with a crescent moon" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a4bd29540a39a3bb803_COOL.JPG", "alt": "Three hikers on a rocky trail toward a mountain lake" }
+      ]
+    },
+    {
+      "name": "Culture",
+      "photos": [
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f3b7a23e3f1e36b969b3_DSC00971.jpeg", "alt": "Silhouettes on a lighthouse balcony at sunset" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f41c83e1fa8e62feb3c9_DSC00601-min.jpeg", "alt": "Two men enjoying waves at a rocky beach" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f434455209ba728d907b_DSC01032-min.jpeg", "alt": "White cat walking on stone under warm light" },
+        { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/6941f59f2aeb043419042047_DSC00912-min.jpeg", "alt": "Ocean horizon at dusk from a lighthouse balcony" }
+      ]
+    }
+  ]
+}
