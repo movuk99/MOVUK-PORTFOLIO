@@ -123,6 +123,8 @@ movuk-portfolio/
 ├── videos.json                  → Lista de videos (editable)
 ├── places.json                    → Mosaico "Places I've worked at" (editable)
 ├── logo.png                        → Logo MOVUK usado en nav y footer
+├── works-hero.mp4                    → Video de fondo en loop en Works
+├── works-hero-poster.jpg               → Imagen de portada mientras carga el video
 ├── about-portrait.jpg                → Foto principal de About
 └── place-*.jpg                        → Fotos del mosaico de lugares
 ```

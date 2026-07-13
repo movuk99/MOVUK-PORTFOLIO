@@ -290,6 +290,27 @@ function waitForImages() {
   }));
 }
 
+function waitForVideos() {
+  const vids = Array.from(document.querySelectorAll('video'));
+  return Promise.all(vids.map(v => {
+    if (v.readyState >= 2) return Promise.resolve(); // HAVE_CURRENT_DATA or better
+    return new Promise(resolve => {
+      v.addEventListener('loadeddata', resolve, { once: true });
+      v.addEventListener('error', resolve, { once: true });
+    });
+  }));
+}
+
+function initReducedMotionVideo() {
+  const video = document.querySelector('.works-hero video');
+  if (!video) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.pause();
+    video.removeAttribute('autoplay');
+    video.removeAttribute('loop');
+  }
+}
+
 function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -303,6 +324,7 @@ function hidePageLoader() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   initNav();
+  initReducedMotionVideo();
   const lightbox = buildLightbox();
 
   const tasks = [];
@@ -365,7 +387,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // dynamic) and web fonts to finish, with a safety timeout so a slow
   // network never leaves the loader stuck forever.
   const readyPromise = Promise.all(tasks)
-    .then(waitForImages)
+    .then(() => Promise.all([waitForImages(), waitForVideos()]))
     .then(() => (document.fonts && document.fonts.ready ? document.fonts.ready : null))
     .then(() => wait(350)); // small floor so the loader never just flashes
 

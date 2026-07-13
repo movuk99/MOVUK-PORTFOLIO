@@ -93,9 +93,16 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   font-size: clamp(15px, 2vw, 19px);
   color: var(--ink);
 }
+.loader-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 .loader-logo {
   height: clamp(46px, 6vw, 68px);
   width: auto;
+  display: block;
 }
 
 .loader-dots {
@@ -250,6 +257,47 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
 .contour-section {
   padding: 0 var(--gutter);
   margin: clamp(48px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
+}
+
+/* ============================================================
+   Works page — full-bleed looping video hero
+   ============================================================ */
+.works-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+.works-hero video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.works-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(21, 23, 26, 0.18);
+  pointer-events: none;
+}
+.works-hero-label {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(26px, 4vw, 44px);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+  pointer-events: none;
 }
 
 /* ============================================================
