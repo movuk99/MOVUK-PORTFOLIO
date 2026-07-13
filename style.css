@@ -658,7 +658,7 @@ form.contact-form { display: grid; gap: 22px; }
   padding: clamp(48px, 7vw, 88px) var(--gutter) 56px;
 }
 .footer-logo img {
-  width: clamp(130px, 13vw, 210px);
+  width: clamp(64px, 6vw, 100px);
   height: auto;
 }
 .footer-col h4 {

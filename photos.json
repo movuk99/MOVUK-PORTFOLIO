@@ -1,14 +1,19 @@
 {
   "hero": [
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413e5170d58979f4d1c10e_IMG_8141%202-min.jpg", "alt": "Two men in traditional Maasai clothing on a hillside overlooking a valley" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/692f2ffdcf340076874556af_IMG_6728.JPG", "alt": "Snow-covered rocky mountain ridge under a cloudy sky" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413859b9488273628cc79d_DSC07414-2.jpeg", "alt": "Granite dome lit by pink sunset light" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/694139f866604e4b20f94619_DSC00872%203-min.JPG", "alt": "Two women standing in water near a forested shoreline" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a2bee4a7285647d800b_IMG_6735-2.jpeg", "alt": "Sunset over a rocky volcanic crater with lens flare" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a4bd29540a39a3bb803_COOL.JPG", "alt": "Three hikers on a rocky trail toward a mountain lake" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a6571b0c382ba0da8db_IMG_8149-min.jpg", "alt": "Black and white landscape of hilly terrain" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a843c19ab5e380436f3_DSC00743-min.jpeg", "alt": "A cat resting in front of a shop of traditional instruments" },
-    { "src": "https://cdn.prod.website-files.com/692f2728ddd9d226a5c27626/69413a9b3f6f1d1e65467823_IMG_1493.JPG", "alt": "Two people walking a dirt path through a flowering hillside" }
+    { "src": "hero-01.jpg", "alt": "Ornate white Buddhist temple with intricate guardian statues lining a bridge, Thailand" },
+    { "src": "hero-02.jpg", "alt": "Black and white view of the Shanghai skyline across the river" },
+    { "src": "hero-03.jpg", "alt": "Traditional outrigger boat at dusk with pink and purple clouds, Philippines" },
+    { "src": "hero-04.jpg", "alt": "Hikers walking toward a mountain lake with the sun flaring overhead, Pyrenees" },
+    { "src": "hero-05.jpg", "alt": "Black and white photo of two Maasai men walking with sticks across a misty valley, Tanzania" },
+    { "src": "hero-06.jpg", "alt": "Granite dome lit by pink sunset light" },
+    { "src": "hero-07.jpg", "alt": "View through a boat window of the ocean and distant islands in warm filtered light" },
+    { "src": "hero-08.jpg", "alt": "Nighttime street in Bangkok lined with shop signs, with an illuminated temple spire in the distance" },
+    { "src": "hero-09.jpg", "alt": "Silhouette of a climber sitting and looking out over snow-covered peaks at dusk" },
+    { "src": "hero-10.jpg", "alt": "Two women standing in a river with a bridge and hills in the background, Spain" },
+    { "src": "hero-11.jpg", "alt": "Vertical view of a snow-covered mountain valley under a clear blue sky" },
+    { "src": "hero-12.jpg", "alt": "Black and white photo of climbers resting on a snowy mountain summit ridge" },
+    { "src": "hero-13.jpg", "alt": "Sunset over a rocky volcanic crater with lens flare" },
+    { "src": "hero-14.jpg", "alt": "Misty view near the summit of Mount Kilimanjaro with snow patches and clouds below" }
   ],
   "categories": [
     {
