@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Home hero grid
   const heroGrid = document.querySelector('[data-gallery="hero"]');
   if (heroGrid) {
-    fetch('data/photos.json')
+    fetch('photos.json')
       .then(r => r.json())
       .then(data => renderGallery(heroGrid, data.hero, lightbox));
   }
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const worksPhotos = document.querySelector('[data-works="photography"]');
   const worksVideos = document.querySelector('[data-works="videography"]');
   if (worksPhotos) {
-    fetch('data/photos.json')
+    fetch('photos.json')
       .then(r => r.json())
       .then(data => {
         data.categories.forEach((cat, i) => {
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
   if (worksVideos) {
-    fetch('data/videos.json')
+    fetch('videos.json')
       .then(r => r.json())
       .then(videos => renderVideos(worksVideos, videos));
   }

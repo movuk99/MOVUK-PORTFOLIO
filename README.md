@@ -17,34 +17,28 @@ Y abre `http://localhost:8000` en tu navegador.
 
 ## Publicar gratis en GitHub Pages
 
-1. En GitHub, crea un repositorio nuevo llamado exactamente **`tu-usuario.github.io`** (reemplaza `tu-usuario` por tu username real). Esto lo convierte en tu sitio principal.
-2. Sube el contenido de esta carpeta a ese repo:
-   ```bash
-   cd movuk-portfolio
-   git init
-   git add .
-   git commit -m "Portfolio inicial"
-   git branch -M main
-   git remote add origin https://github.com/tu-usuario/tu-usuario.github.io.git
-   git push -u origin main
-   ```
-3. En GitHub → repo → **Settings → Pages**, confirma que la fuente sea la rama `main` (usualmente se activa solo).
-4. En 1–2 minutos tu sitio estará en `https://tu-usuario.github.io`.
+Todos los archivos viven sueltos en la raíz del repo (sin subcarpetas), para que subirlos por drag-and-drop en github.com funcione sin complicaciones.
 
-Cada vez que hagas `git push`, el sitio se actualiza solo.
+1. En tu repo `movuk-portfolio`, sube (o reemplaza) estos 9 archivos arrastrándolos directo a la raíz con **Add file → Upload files**.
+2. Ve a **Settings → Pages**. En "Build and deployment" → Source, elige **Deploy from a branch**, rama `main`, carpeta `/ (root)`. Guarda.
+3. En 1–2 minutos tu sitio va a estar en `https://movuk99.github.io/movuk-portfolio/`.
+
+> Nota: como el repo se llama `movuk-portfolio` (no `movuk99.github.io`), tu URL incluye `/movuk-portfolio/` al final. Si prefieres el dominio limpio `https://movuk99.github.io`, tendrías que crear un repo nuevo con ese nombre exacto y subir los archivos ahí — es la única diferencia.
+
+Cada vez que reemplaces un archivo desde la web de GitHub, el sitio se actualiza solo en 1–2 minutos.
 
 ## Agregar fotos nuevas
 
-No hace falta tocar HTML. Todo el contenido de las galerías vive en `data/photos.json`.
+No hace falta tocar HTML. Todo el contenido de las galerías vive en `photos.json`.
 
-1. Sube tu imagen nueva a la carpeta `images/` (organiza por categoría si quieres, ej. `images/outdoors/foto.jpg`).
-2. Abre `data/photos.json` y agrega una entrada dentro de la categoría que corresponda (o crea una categoría nueva copiando la estructura):
+1. Sube tu imagen nueva a la raíz del repo (o usa un servicio externo gratis como imgbb.com y pega esa URL — así el repo no se llena de archivos pesados).
+2. Abre `photos.json` (botón de lápiz para editar directo en github.com) y agrega una entrada dentro de la categoría que corresponda:
    ```json
-   { "src": "images/outdoors/foto.jpg", "alt": "Descripción corta de la foto" }
+   { "src": "foto-nueva.jpg", "alt": "Descripción corta de la foto" }
    ```
-3. Guarda, haz commit y push. Listo.
+3. Guarda ("Commit changes"). Listo, se actualiza solo.
 
-Para agregar un video nuevo, edita `data/videos.json` de la misma forma (solo necesitas el ID de YouTube, el que aparece después de `v=` en la URL del video).
+Para agregar un video nuevo, edita `videos.json` de la misma forma (solo necesitas el ID de YouTube, el que aparece después de `v=` en la URL del video).
 
 ## Activar el formulario de contacto
 
@@ -58,15 +52,14 @@ El formulario en `contact.html` está listo para [Formspree](https://formspree.i
 
 ```
 movuk-portfolio/
-├── index.html          → Home
-├── works.html           → Videografía + fotografía
-├── about.html            → Bio
-├── contact.html            → Formulario de contacto
-├── css/style.css            → Todos los estilos
-├── js/main.js                → Nav, galerías, lightbox, video cards
-├── data/photos.json            → Contenido de las galerías (editable)
-├── data/videos.json             → Lista de videos (editable)
-└── images/                       → Fotos nuevas que subas (opcional)
+├── index.html        → Home
+├── works.html         → Videografía + fotografía
+├── about.html          → Bio
+├── contact.html          → Formulario de contacto
+├── style.css               → Todos los estilos
+├── main.js                  → Nav, galerías, lightbox, video cards
+├── photos.json                → Contenido de las galerías (editable)
+└── videos.json                  → Lista de videos (editable)
 ```
 
 ## Notas de diseño
