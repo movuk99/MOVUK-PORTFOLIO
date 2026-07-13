@@ -51,7 +51,47 @@ Cada categoría en Works tiene exactamente **9 casillas** (grid 3×3). Cada casi
 
 > Si quieres agregar una categoría nueva, copia la estructura completa de una existente (nombre + 9 casillas) dentro del arreglo `categories`.
 
-Para agregar un video nuevo, edita `videos.json` de la misma forma (solo necesitas el ID de YouTube, el que aparece después de `v=` en la URL del video). El slider de videos agrupa automáticamente de a 3 por página.
+Para agregar un video nuevo, edita `videos.json`. El slider agrupa automáticamente de a 3 por página. Cada video soporta tres orígenes:
+
+**YouTube** (como los que ya tienes):
+```json
+{
+  "provider": "youtube",
+  "id": "dQw4w9WgXcQ",
+  "title": "Título del video",
+  "description": "Descripción corta.",
+  "tag": "Julio 2026"
+}
+```
+El `id` es lo que aparece después de `v=` en la URL del video.
+
+**Vimeo** (recomendado para lo nuevo — gratis, sin anuncios, sin límite de tamaño real):
+```json
+{
+  "provider": "vimeo",
+  "id": "76979871",
+  "thumbnail": "https://i.vimeocdn.com/video/xxxxxxx.jpg",
+  "title": "Título del video",
+  "description": "Descripción corta.",
+  "tag": "Julio 2026"
+}
+```
+- El `id` es el número que aparece en la URL de tu video: `vimeo.com/76979871` → `76979871`.
+- Antes de subir un video a Vimeo, asegúrate de que su privacidad permita "embed" en cualquier sitio (Settings → Privacy → Where can this be embedded → Anywhere).
+- Para el `thumbnail`: abre en el navegador `https://vimeo.com/api/oembed.json?url=https://vimeo.com/TU_ID` (reemplazando TU_ID), busca el campo `"thumbnail_url"` en el texto que aparece, y copia esa URL. Si no pones `thumbnail`, la casilla muestra un fondo simple con el botón de play (sigue funcionando, solo sin vista previa).
+
+**Auto-hospedado** (solo para clips cortos y bien comprimidos — ten en cuenta que GitHub limita cada archivo a 100MB y recomienda que el repo completo no pase de ~1GB):
+```json
+{
+  "provider": "self",
+  "id": "mi-clip.mp4",
+  "thumbnail": "mi-clip-portada.jpg",
+  "title": "Título del video",
+  "description": "Descripción corta.",
+  "tag": "Julio 2026"
+}
+```
+Sube el `.mp4` (y opcionalmente una imagen de portada) a la raíz del repo junto con los demás archivos, y usa esos nombres de archivo en `id` y `thumbnail`.
 
 ## Activar el formulario de contacto
 

@@ -115,6 +115,23 @@ function renderSlotGrid(container, slots, lightbox, categoryLabel) {
   });
 }
 
+// ---- video provider helpers ----
+function videoThumb(v) {
+  if (v.thumbnail) return v.thumbnail;
+  if (v.provider === 'youtube') return `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`;
+  return null; // vimeo / self without an explicit thumbnail -> plain placeholder
+}
+function videoEmbedHTML(v) {
+  if (v.provider === 'youtube') {
+    return `<iframe src="https://www.youtube.com/embed/${v.id}?autoplay=1" title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  }
+  if (v.provider === 'vimeo') {
+    return `<iframe src="https://player.vimeo.com/video/${v.id}?autoplay=1" title="${v.title}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+  }
+  // self-hosted file in the repo (v.id is the file path, e.g. "videos/clip.mp4")
+  return `<video src="${v.id}" controls autoplay playsinline></video>`;
+}
+
 // ---- video slider: paged, with click-to-embed thumbnails ----
 function renderVideoSlider(container, videos) {
   const perPage = 3;
@@ -130,11 +147,12 @@ function renderVideoSlider(container, videos) {
     const page = document.createElement('div');
     page.className = 'video-page';
     pageVideos.forEach(v => {
+      const thumb = videoThumb(v);
       const card = document.createElement('div');
       card.className = 'video-card';
       card.innerHTML = `
-        <div class="video-thumb" data-yt="${v.youtubeId}">
-          <img src="https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+        <div class="video-thumb${thumb ? '' : ' no-thumb'}">
+          ${thumb ? `<img src="${thumb}" alt="${v.title}" loading="lazy">` : ''}
           <button class="play-btn" aria-label="Play ${v.title}">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </button>
@@ -145,9 +163,9 @@ function renderVideoSlider(container, videos) {
           <span class="video-tag">${v.tag}</span>
         </div>
       `;
-      const thumb = card.querySelector('.video-thumb');
-      thumb.addEventListener('click', () => {
-        thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1" title="${v.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      const thumbEl = card.querySelector('.video-thumb');
+      thumbEl.addEventListener('click', () => {
+        thumbEl.innerHTML = videoEmbedHTML(v);
       });
       page.appendChild(card);
     });

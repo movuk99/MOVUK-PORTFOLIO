@@ -429,7 +429,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   cursor: pointer;
 }
 .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.video-thumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-thumb.no-thumb { background: linear-gradient(135deg, var(--paper-alt), var(--ink)); }
+.video-thumb iframe, .video-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video-thumb .play-btn {
   position: absolute;
   top: 50%; left: 50%;
