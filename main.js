@@ -16,25 +16,68 @@ function initNav() {
   );
 }
 
-// ---- lightbox ----
+// ---- lightbox (supports a single image OR a folder slideshow) ----
 function buildLightbox() {
   const el = document.createElement('div');
   el.className = 'lightbox';
   el.innerHTML = `
     <button class="lightbox-close" aria-label="Close">✕</button>
-    <img src="" alt="">
+    <div class="lightbox-frame">
+      <button class="lightbox-arrow prev" aria-label="Previous photo" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="lightbox-analog" style="display:none">Analog picture</span>
+      <img src="" alt="">
+      <button class="lightbox-arrow next" aria-label="Next photo" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
     <figcaption></figcaption>
+    <div class="lightbox-dots"></div>
   `;
   document.body.appendChild(el);
 
   const img = el.querySelector('img');
   const caption = el.querySelector('figcaption');
   const closeBtn = el.querySelector('.lightbox-close');
+  const prevBtn = el.querySelector('.lightbox-arrow.prev');
+  const nextBtn = el.querySelector('.lightbox-arrow.next');
+  const analogTag = el.querySelector('.lightbox-analog');
+  const dotsEl = el.querySelector('.lightbox-dots');
 
-  function open(src, alt, tag) {
-    img.src = src;
-    img.alt = alt || '';
-    caption.textContent = tag || alt || '';
+  let photos = [];
+  let idx = 0;
+  let label = '';
+
+  function render() {
+    const p = photos[idx];
+    img.src = p.src;
+    img.alt = p.alt || '';
+    caption.textContent = label ? `${label} — ${p.alt || ''}` : (p.alt || '');
+    analogTag.style.display = p.analog ? '' : 'none';
+    dotsEl.querySelectorAll('span').forEach((d, di) => d.classList.toggle('is-active', di === idx));
+  }
+  function show(i) {
+    idx = (i + photos.length) % photos.length;
+    render();
+  }
+
+  // open(photosArray, startIndex, label)
+  function open(photosArray, startIndex, categoryLabel) {
+    photos = photosArray;
+    idx = startIndex || 0;
+    label = categoryLabel || '';
+
+    const multi = photos.length > 1;
+    prevBtn.style.display = multi ? '' : 'none';
+    nextBtn.style.display = multi ? '' : 'none';
+    dotsEl.style.display = multi ? '' : 'none';
+    dotsEl.innerHTML = '';
+    if (multi) {
+      photos.forEach(() => dotsEl.appendChild(document.createElement('span')));
+    }
+
+    render();
     el.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -42,74 +85,56 @@ function buildLightbox() {
     el.classList.remove('is-open');
     document.body.style.overflow = '';
   }
+
   closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', () => show(idx - 1));
+  nextBtn.addEventListener('click', () => show(idx + 1));
   el.addEventListener('click', (e) => { if (e.target === el) close(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!el.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
 
   return { open };
 }
 
-// ---- render a fixed 3x3 grid of slots; each slot may hold 1+ photos (mini-slideshow) ----
-function renderSlotGrid(container, slots, lightbox, categoryLabel) {
-  slots.forEach(slot => {
+// ---- render a grid of folders (one grid-cell per folder = one mini-gallery) ----
+// folder: { title: "China", photos: [{ src, alt, analog }, ...] }  -- photos[0] is the cover/portada
+function renderFolderGrid(container, folders, lightbox, categoryLabel) {
+  folders.forEach(folder => {
     const cell = document.createElement('div');
     cell.className = 'grid-cell';
 
-    if (!slot.photos || slot.photos.length === 0) {
+    if (!folder.photos || folder.photos.length === 0) {
       cell.classList.add('is-empty');
       container.appendChild(cell);
       return;
     }
 
-    const photos = slot.photos;
-    let idx = 0;
-
+    const cover = folder.photos[0];
     const imgEl = document.createElement('img');
-    imgEl.src = photos[0].src;
-    imgEl.alt = photos[0].alt || '';
+    imgEl.src = cover.src;
+    imgEl.alt = cover.alt || folder.title || '';
     imgEl.loading = 'lazy';
     cell.appendChild(imgEl);
 
-    function show(i) {
-      idx = (i + photos.length) % photos.length;
-      imgEl.src = photos[idx].src;
-      imgEl.alt = photos[idx].alt || '';
-      if (dotsEl) {
-        dotsEl.querySelectorAll('span').forEach((d, di) => d.classList.toggle('is-active', di === idx));
-      }
+    const titleEl = document.createElement('span');
+    titleEl.className = 'cell-title';
+    titleEl.textContent = folder.title || '';
+    cell.appendChild(titleEl);
+
+    if (folder.photos.length > 1) {
+      const countEl = document.createElement('span');
+      countEl.className = 'cell-count';
+      countEl.textContent = String(folder.photos.length).padStart(2, '0');
+      cell.appendChild(countEl);
     }
 
     cell.addEventListener('click', () => {
-      const tag = categoryLabel ? `${categoryLabel} — ${photos[idx].alt}` : photos[idx].alt;
-      lightbox.open(photos[idx].src, photos[idx].alt, tag);
+      lightbox.open(folder.photos, 0, categoryLabel ? `${categoryLabel} — ${folder.title}` : folder.title);
     });
-
-    let dotsEl = null;
-    if (photos.length > 1) {
-      const prevBtn = document.createElement('button');
-      prevBtn.className = 'cell-arrow prev';
-      prevBtn.setAttribute('aria-label', 'Previous photo in this set');
-      prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
-      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
-
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'cell-arrow next';
-      nextBtn.setAttribute('aria-label', 'Next photo in this set');
-      nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
-      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
-
-      dotsEl = document.createElement('div');
-      dotsEl.className = 'cell-dots';
-      photos.forEach((_, di) => {
-        const dot = document.createElement('span');
-        if (di === 0) dot.classList.add('is-active');
-        dotsEl.appendChild(dot);
-      });
-
-      cell.appendChild(prevBtn);
-      cell.appendChild(nextBtn);
-      cell.appendChild(dotsEl);
-    }
 
     container.appendChild(cell);
   });
@@ -360,7 +385,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const grid = document.createElement('div');
             grid.className = 'gallery';
             worksPhotos.appendChild(grid);
-            renderSlotGrid(grid, cat.slots, lightbox, cat.name);
+            renderFolderGrid(grid, cat.folders, lightbox, cat.name);
           });
         })
     );
