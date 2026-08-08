@@ -698,21 +698,26 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   padding: clamp(24px, 4vw, 40px) var(--gutter) clamp(56px, 8vw, 88px);
   text-align: center;
 }
+.more-work-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
 .more-work-label {
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.04em;
   color: var(--stone);
-  margin-bottom: 20px;
 }
 .linkedin-black {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 28px;
+  height: 28px;
   color: var(--ink);
   transition: color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
 }
 .linkedin-black:hover { color: var(--coral); transform: translateY(-1px); }
 .linkedin-black svg { width: 100%; height: 100%; }
