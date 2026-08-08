@@ -311,15 +311,46 @@ function initSlider(container, photos) {
 }
 
 // ---- render the "Places I've worked at" hover mosaic ----
+// ---- places strip: horizontal, infinitely-looping (native 2-finger / touch scroll) ----
 function renderPlaces(container, places) {
-  places.forEach(p => {
-    const item = document.createElement('div');
-    item.className = 'place-item';
-    item.innerHTML = `
-      <img src="${p.src}" alt="${p.location}" loading="lazy">
-      <div class="place-overlay"><span>${p.location}</span></div>
-    `;
-    container.appendChild(item);
+  if (!places.length) return;
+  const SET_COUNT = 6; // enough repeats that the wrap point is never visible on any screen width
+  const startSet = Math.floor(SET_COUNT / 2);
+
+  for (let s = 0; s < SET_COUNT; s++) {
+    places.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'place-item';
+      item.innerHTML = `
+        <img src="${p.src}" alt="${p.location}" loading="lazy" draggable="false">
+        <div class="place-overlay"><span>${p.location}</span></div>
+      `;
+      container.appendChild(item);
+    });
+  }
+
+  let setWidth = 0;
+  function measure() {
+    setWidth = container.scrollWidth / SET_COUNT;
+    if (setWidth > 0) container.scrollLeft = setWidth * startSet;
+  }
+
+  const imgs = container.querySelectorAll('img');
+  let loaded = 0;
+  imgs.forEach(img => {
+    if (img.complete) loaded++;
+    else img.addEventListener('load', () => { loaded++; if (loaded === imgs.length) measure(); }, { once: true });
+  });
+  if (loaded === imgs.length) measure();
+  setTimeout(measure, 900); // safety re-measure in case some images were slow/cached oddly
+
+  container.addEventListener('scroll', () => {
+    if (!setWidth) return;
+    if (container.scrollLeft < setWidth * 0.5) {
+      container.scrollLeft += setWidth;
+    } else if (container.scrollLeft > setWidth * (SET_COUNT - 1.5)) {
+      container.scrollLeft -= setWidth;
+    }
   });
 }
 
