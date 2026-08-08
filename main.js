@@ -101,9 +101,37 @@ function buildLightbox() {
 }
 
 // ---- render a grid of folders (one grid-cell per folder = one mini-gallery) ----
-// folder: { title: "China", photos: [{ src, alt, analog }, ...] }  -- photos[0] is the cover/portada
+// folder: { title, photos: [{src, alt, analog}, ...] }  -- photos[0] is the cover/portada
+// OR a link-out cell: { title, link: "https://...", photos: [{src, alt}] } -- opens the link instead of the lightbox
 function renderFolderGrid(container, folders, lightbox, categoryLabel) {
   folders.forEach(folder => {
+    if (folder.link) {
+      const cell = document.createElement('a');
+      cell.className = 'grid-cell grid-cell-link';
+      cell.href = folder.link;
+      cell.target = '_blank';
+      cell.rel = 'noopener';
+
+      const imgEl = document.createElement('img');
+      imgEl.src = folder.photos[0].src;
+      imgEl.alt = folder.photos[0].alt || folder.title || '';
+      imgEl.loading = 'lazy';
+      cell.appendChild(imgEl);
+
+      const titleEl = document.createElement('span');
+      titleEl.className = 'cell-title';
+      titleEl.textContent = folder.title || '';
+      cell.appendChild(titleEl);
+
+      const iconEl = document.createElement('span');
+      iconEl.className = 'cell-link-icon';
+      iconEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>';
+      cell.appendChild(iconEl);
+
+      container.appendChild(cell);
+      return;
+    }
+
     const cell = document.createElement('div');
     cell.className = 'grid-cell';
 

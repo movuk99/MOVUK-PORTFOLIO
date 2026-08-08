@@ -59,265 +59,6 @@
   ],
   "categories": [
     {
-      "name": "Travel & Culture",
-      "folders": [
-        {
-          "title": "Cascais",
-          "photos": [
-            {
-              "src": "travel-cascais-portada.jpg",
-              "alt": "Photo from Cascais",
-              "analog": true
-            },
-            {
-              "src": "travel-cascais-analog-01.jpg",
-              "alt": "Photo from Cascais",
-              "analog": true
-            },
-            {
-              "src": "travel-cascais-analog-02.jpg",
-              "alt": "Photo from Cascais",
-              "analog": true
-            },
-            {
-              "src": "travel-cascais-analog-03.jpg",
-              "alt": "Photo from Cascais",
-              "analog": true
-            }
-          ]
-        },
-        {
-          "title": "China",
-          "photos": [
-            {
-              "src": "travel-china-portada.jpg",
-              "alt": "Photo from China"
-            },
-            {
-              "src": "travel-china-01.jpg",
-              "alt": "Photo from China"
-            },
-            {
-              "src": "travel-china-02.jpg",
-              "alt": "Photo from China"
-            },
-            {
-              "src": "travel-china-03.jpg",
-              "alt": "Photo from China"
-            },
-            {
-              "src": "travel-china-04.jpg",
-              "alt": "Photo from China"
-            }
-          ]
-        },
-        {
-          "title": "Faro",
-          "photos": [
-            {
-              "src": "travel-faro-portada.jpg",
-              "alt": "Photo from Faro",
-              "analog": true
-            },
-            {
-              "src": "travel-faro-01.jpg",
-              "alt": "Photo from Faro"
-            },
-            {
-              "src": "travel-faro-02.jpg",
-              "alt": "Photo from Faro"
-            },
-            {
-              "src": "travel-faro-03.jpg",
-              "alt": "Photo from Faro"
-            },
-            {
-              "src": "travel-faro-04.jpg",
-              "alt": "Photo from Faro"
-            },
-            {
-              "src": "travel-faro-analog-05.jpg",
-              "alt": "Photo from Faro",
-              "analog": true
-            },
-            {
-              "src": "travel-faro-analog-06.jpg",
-              "alt": "Photo from Faro",
-              "analog": true
-            }
-          ]
-        },
-        {
-          "title": "Paris",
-          "photos": [
-            {
-              "src": "travel-paris-portada.jpg",
-              "alt": "Photo from Paris",
-              "analog": true
-            },
-            {
-              "src": "travel-paris-analog-01.jpg",
-              "alt": "Photo from Paris",
-              "analog": true
-            }
-          ]
-        },
-        {
-          "title": "Philippines",
-          "photos": [
-            {
-              "src": "travel-philippines-portada.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-01.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-02.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-03.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-04.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-05.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-06.jpg",
-              "alt": "Photo from Philippines"
-            },
-            {
-              "src": "travel-philippines-analog-07.jpg",
-              "alt": "Photo from Philippines",
-              "analog": true
-            }
-          ]
-        },
-        {
-          "title": "Ribadesella",
-          "photos": [
-            {
-              "src": "travel-ribadesella-portada.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-01.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-02.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-03.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-04.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-05.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-06.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            },
-            {
-              "src": "travel-ribadesella-analog-07.jpg",
-              "alt": "Photo from Ribadesella",
-              "analog": true
-            }
-          ]
-        },
-        {
-          "title": "Tangier",
-          "photos": [
-            {
-              "src": "travel-tangier-portada.jpg",
-              "alt": "Photo from Tangier"
-            },
-            {
-              "src": "travel-tangier-01.jpg",
-              "alt": "Photo from Tangier"
-            },
-            {
-              "src": "travel-tangier-02.jpg",
-              "alt": "Photo from Tangier"
-            },
-            {
-              "src": "travel-tangier-03.jpg",
-              "alt": "Photo from Tangier"
-            },
-            {
-              "src": "travel-tangier-04.jpg",
-              "alt": "Photo from Tangier"
-            },
-            {
-              "src": "travel-tangier-05.jpg",
-              "alt": "Photo from Tangier"
-            }
-          ]
-        },
-        {
-          "title": "Thailand",
-          "photos": [
-            {
-              "src": "travel-thailand-portada.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-01.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-02.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-03.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-04.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-05.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-06.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-07.jpg",
-              "alt": "Photo from Thailand"
-            },
-            {
-              "src": "travel-thailand-08.jpg",
-              "alt": "Photo from Thailand"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Outdoor Photography",
       "folders": [
         {
@@ -606,6 +347,260 @@
             {
               "src": "outdoor-yosemite-02.jpg",
               "alt": "Photo from Yosemite"
+            }
+          ]
+        },
+        {
+          "title": "Check out OCMT on Insta",
+          "link": "https://www.instagram.com/outdoorscmt/",
+          "photos": [
+            {
+              "src": "outdoor-ocmt-cover.jpg",
+              "alt": "OCMT mountaineering logo over a misty mountain ridge"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Travel & Culture",
+      "folders": [
+        {
+          "title": "Cascais",
+          "photos": [
+            {
+              "src": "travel-cascais-portada.jpg",
+              "alt": "Photo from Cascais",
+              "analog": true
+            },
+            {
+              "src": "travel-cascais-analog-01.jpg",
+              "alt": "Photo from Cascais",
+              "analog": true
+            },
+            {
+              "src": "travel-cascais-analog-02.jpg",
+              "alt": "Photo from Cascais",
+              "analog": true
+            },
+            {
+              "src": "travel-cascais-analog-03.jpg",
+              "alt": "Photo from Cascais",
+              "analog": true
+            }
+          ]
+        },
+        {
+          "title": "China",
+          "photos": [
+            {
+              "src": "travel-china-portada.jpg",
+              "alt": "Photo from China"
+            },
+            {
+              "src": "travel-china-01.jpg",
+              "alt": "Photo from China"
+            },
+            {
+              "src": "travel-china-02.jpg",
+              "alt": "Photo from China"
+            },
+            {
+              "src": "travel-china-03.jpg",
+              "alt": "Photo from China"
+            },
+            {
+              "src": "travel-china-04.jpg",
+              "alt": "Photo from China"
+            }
+          ]
+        },
+        {
+          "title": "Faro",
+          "photos": [
+            {
+              "src": "travel-faro-portada.jpg",
+              "alt": "Photo from Faro",
+              "analog": true
+            },
+            {
+              "src": "travel-faro-01.jpg",
+              "alt": "Photo from Faro"
+            },
+            {
+              "src": "travel-faro-02.jpg",
+              "alt": "Photo from Faro"
+            },
+            {
+              "src": "travel-faro-03.jpg",
+              "alt": "Photo from Faro"
+            },
+            {
+              "src": "travel-faro-04.jpg",
+              "alt": "Photo from Faro"
+            },
+            {
+              "src": "travel-faro-analog-05.jpg",
+              "alt": "Photo from Faro",
+              "analog": true
+            },
+            {
+              "src": "travel-faro-analog-06.jpg",
+              "alt": "Photo from Faro",
+              "analog": true
+            }
+          ]
+        },
+        {
+          "title": "Philippines",
+          "photos": [
+            {
+              "src": "travel-philippines-portada.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-01.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-02.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-03.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-04.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-05.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-06.jpg",
+              "alt": "Photo from Philippines"
+            },
+            {
+              "src": "travel-philippines-analog-07.jpg",
+              "alt": "Photo from Philippines",
+              "analog": true
+            }
+          ]
+        },
+        {
+          "title": "Ribadesella",
+          "photos": [
+            {
+              "src": "travel-ribadesella-portada.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-01.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-02.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-03.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-04.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-05.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-06.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            },
+            {
+              "src": "travel-ribadesella-analog-07.jpg",
+              "alt": "Photo from Ribadesella",
+              "analog": true
+            }
+          ]
+        },
+        {
+          "title": "Tangier",
+          "photos": [
+            {
+              "src": "travel-tangier-portada.jpg",
+              "alt": "Photo from Tangier"
+            },
+            {
+              "src": "travel-tangier-01.jpg",
+              "alt": "Photo from Tangier"
+            },
+            {
+              "src": "travel-tangier-02.jpg",
+              "alt": "Photo from Tangier"
+            },
+            {
+              "src": "travel-tangier-03.jpg",
+              "alt": "Photo from Tangier"
+            },
+            {
+              "src": "travel-tangier-04.jpg",
+              "alt": "Photo from Tangier"
+            },
+            {
+              "src": "travel-tangier-05.jpg",
+              "alt": "Photo from Tangier"
+            }
+          ]
+        },
+        {
+          "title": "Thailand",
+          "photos": [
+            {
+              "src": "travel-thailand-portada.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-01.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-02.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-03.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-04.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-05.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-06.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-07.jpg",
+              "alt": "Photo from Thailand"
+            },
+            {
+              "src": "travel-thailand-08.jpg",
+              "alt": "Photo from Thailand"
             }
           ]
         }

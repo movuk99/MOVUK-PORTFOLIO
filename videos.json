@@ -40,5 +40,34 @@
     "title": "Dwarf In Despair",
     "description": "IE Film Challenge — Best Video, Best Editing award.",
     "tag": "March 2025"
+  },
+  {
+    "provider": "self",
+    "id": "ocmt-trailer.mp4",
+    "thumbnail": "ocmt-trailer-thumb.jpg",
+    "title": "OCMT Official Trailer",
+    "description": "Launch trailer for the Outdoors Club Mountaineering Team.",
+    "tag": "December 2025"
+  },
+  {
+    "provider": "youtube",
+    "id": "7U142NO6C94",
+    "title": "Toubkal",
+    "description": "Aftermovie for OCMT expedition to Mount Toubkal.",
+    "tag": "February 2026"
+  },
+  {
+    "provider": "youtube",
+    "id": "G9vrcyd6ZvY",
+    "title": "Overnight IE Outdoors Club",
+    "description": "Sierra de Gredos Overnight Hike recap.",
+    "tag": "October 2025"
+  },
+  {
+    "provider": "youtube",
+    "id": "QGnfSfD4Zpk",
+    "title": "Entre el Mar y Siddharta",
+    "description": "South East Asia audio-visual collage.",
+    "tag": "June 2026"
   }
 ]
