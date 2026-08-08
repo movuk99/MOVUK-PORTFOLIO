@@ -40,11 +40,15 @@
     "location": "Mexico City, Mexico"
   },
   {
-    "src": "place-segovia.jpg",
-    "location": "Segovia, Spain"
-  },
-  {
     "src": "place-madrid.jpg",
     "location": "Madrid, Spain"
+  },
+  {
+    "src": "place-desierto-leones.jpg",
+    "location": "Desierto de los Leones, Mexico"
+  },
+  {
+    "src": "place-segovia.jpg",
+    "location": "Segovia, Spain"
   }
 ]

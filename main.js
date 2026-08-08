@@ -314,6 +314,7 @@ function initSlider(container, photos) {
 // ---- places strip: horizontal, infinitely-looping (native 2-finger / touch scroll) ----
 function renderPlaces(container, places) {
   if (!places.length) return;
+  places = shuffle(places.slice()); // new random order each page visit
   const SET_COUNT = 6; // enough repeats that the wrap point is never visible on any screen width
   const startSet = Math.floor(SET_COUNT / 2);
 
