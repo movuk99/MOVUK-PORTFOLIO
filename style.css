@@ -357,7 +357,7 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 0.3s ease;
 }
 .hero-slider .slide.is-active { opacity: 1; }
 .hero-slider .slide img {

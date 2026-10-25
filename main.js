@@ -255,7 +255,7 @@ function initSlider(container, photos) {
   photos.forEach((p, i) => {
     const slide = document.createElement('div');
     slide.className = 'slide' + (i === 0 ? ' is-active' : '');
-    slide.innerHTML = `<img src="${p.src}" alt="${p.alt || ''}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+    slide.innerHTML = `<img src="${p.src}" alt="${p.alt || ''}" loading="eager">`;
     slidesWrap.appendChild(slide);
   });
   container.appendChild(slidesWrap);
@@ -276,7 +276,7 @@ function initSlider(container, photos) {
     const dot = document.createElement('button');
     dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
     if (i === 0) dot.classList.add('is-active');
-    dot.addEventListener('click', () => goTo(i));
+    dot.addEventListener('click', () => goTo(i, true));
     dots.appendChild(dot);
   });
 
@@ -287,17 +287,21 @@ function initSlider(container, photos) {
   const slideEls = () => container.querySelectorAll('.slide');
   const dotEls = () => dots.querySelectorAll('button');
 
-  function goTo(i) {
+  // auto-advance every 1s; a photo the viewer picks (arrows, dots, keys) stays 3s
+  const AUTO_MS = 1000;
+  const HOLD_MS = 3000;
+
+  function goTo(i, hold) {
     current = (i + photos.length) % photos.length;
     slideEls().forEach((s, idx) => s.classList.toggle('is-active', idx === current));
     dotEls().forEach((d, idx) => d.classList.toggle('is-active', idx === current));
-    resetTimer();
+    resetTimer(hold ? HOLD_MS : AUTO_MS);
   }
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(next, 6000);
+  function next() { goTo(current + 1, true); }
+  function prev() { goTo(current - 1, true); }
+  function resetTimer(ms) {
+    clearTimeout(timer);
+    timer = setTimeout(() => goTo(current + 1), ms);
   }
 
   prevBtn.addEventListener('click', prev);
@@ -307,7 +311,7 @@ function initSlider(container, photos) {
     if (e.key === 'ArrowRight') next();
   });
 
-  resetTimer();
+  resetTimer(AUTO_MS);
 }
 
 // ---- render the "Places I've worked at" hover mosaic ----
