@@ -610,6 +610,67 @@
       "name": "Others",
       "folders": [
         {
+          "title": "Muara",
+          "photos": [
+            {
+              "src": "other-muara-portada.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-01.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-02.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-03.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-04.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-05.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-06.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-07.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-08.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-09.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-10.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-11.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-12.jpg",
+              "alt": "Photo from Muara"
+            },
+            {
+              "src": "other-muara-13.jpg",
+              "alt": "Photo from Muara"
+            }
+          ]
+        },
+        {
           "title": "IE Casa Concert",
           "photos": [
             {
