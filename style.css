@@ -244,32 +244,33 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   }
 }
 
-/* Home on phones: no burger, white logo, page links over the hero photo */
+/* Home on phones: light background, no burger or arrows, page links over the hero photo */
 .hero-links { display: none; }
 @media (max-width: 720px) {
+  .site-nav--home { background: transparent; }
   .site-nav--home .nav-toggle { display: none; }
-  .site-nav--home .nav-logo { filter: invert(1); }
   .hero-links {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 4px;
+    gap: 6px;
     position: absolute;
-    top: calc(50vh + 34px);
-    top: calc(50svh + 34px);
+    top: 50vh;
+    top: 50svh;
     right: var(--gutter);
+    transform: translateY(-50%);
     z-index: 30;
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.2;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.25;
   }
   .hero-links a {
-    color: #fff;
+    color: var(--coral);
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+    text-underline-offset: 3px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -357,7 +358,7 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 1s ease;
 }
 .hero-slider .slide.is-active { opacity: 1; }
 .hero-slider .slide img {
@@ -411,6 +412,14 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .slider-dots button.is-active { background: #fff; transform: scale(1.3); }
+
+/* Home on phones: light background behind the photo, swipe instead of arrows */
+@media (max-width: 720px) {
+  .hero-slider { background: var(--paper); }
+  .hero-slider .slider-arrow { display: none; }
+  .hero-slider .slider-dots button { background: rgba(21, 23, 26, 0.25); }
+  .hero-slider .slider-dots button.is-active { background: var(--ink); }
+}
 
 /* ============================================================
    Hero

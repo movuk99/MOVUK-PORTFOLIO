@@ -255,7 +255,7 @@ function initSlider(container, photos) {
   photos.forEach((p, i) => {
     const slide = document.createElement('div');
     slide.className = 'slide' + (i === 0 ? ' is-active' : '');
-    slide.innerHTML = `<img src="${p.src}" alt="${p.alt || ''}" loading="eager">`;
+    slide.innerHTML = `<img src="${p.src}" alt="${p.alt || ''}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
     slidesWrap.appendChild(slide);
   });
   container.appendChild(slidesWrap);
@@ -287,8 +287,8 @@ function initSlider(container, photos) {
   const slideEls = () => container.querySelectorAll('.slide');
   const dotEls = () => dots.querySelectorAll('button');
 
-  // auto-advance every 1s; a photo the viewer picks (arrows, dots, keys) stays 3s
-  const AUTO_MS = 1000;
+  // auto-advance every 3s; a photo the viewer picks (arrows, dots, keys, swipe) also stays 3s
+  const AUTO_MS = 3000;
   const HOLD_MS = 3000;
 
   function goTo(i, hold) {
@@ -310,6 +310,20 @@ function initSlider(container, photos) {
     if (e.key === 'ArrowLeft') prev();
     if (e.key === 'ArrowRight') next();
   });
+
+  // phones: swipe left/right instead of the (hidden) arrows
+  let touchX = null, touchY = null;
+  container.addEventListener('touchstart', (e) => {
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  container.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    touchX = touchY = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) dx < 0 ? next() : prev();
+  }, { passive: true });
 
   resetTimer(AUTO_MS);
 }
