@@ -483,14 +483,14 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   .hero-slider .slider-dots { bottom: clamp(20px, 4vw, 36px); }
 }
 
-/* Works: same frame around the hero video, with the scroll arrow in the bottom band */
+/* Works: same side margins as Home, with the whole 16:9 video uncropped; scroll arrow in the bottom band */
 .site-nav--framed { background: #fff; }
 .site-nav--framed .nav-toggle span { background: var(--ink); }
 .works-hero video {
   inset: var(--frame-top) var(--photo-side) var(--frame-bottom);
   width: calc(100% - 2 * var(--photo-side));
   height: auto;
-  aspect-ratio: 3 / 2; /* same box as the Home photos */
+  aspect-ratio: 16 / 9;
   margin: auto 0;
 }
 .works-hero::after { content: none; } /* no tint: it would gray the frame */
@@ -503,7 +503,6 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   .works-hero video {
     inset: 0 28px;
     width: calc(100% - 56px);
-    aspect-ratio: 16 / 9;
   }
 }
 
