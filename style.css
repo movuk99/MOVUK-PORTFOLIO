@@ -453,7 +453,8 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
 
 /* Home: white frame around the photo; the nav sits in the top band, the dots in the bottom one */
 .site-nav--home { background: none; }
-.hero-slider {
+.hero-slider,
+.works-hero {
   --frame-top: calc(var(--nav-h) + 16px);
   --frame-side: clamp(40px, 7vw, 120px);
   --frame-bottom: 80px;
@@ -463,7 +464,8 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   background: #fff;
 }
 @supports (height: 100svh) {
-  .hero-slider { --hero-h: 100svh; }
+  .hero-slider,
+  .works-hero { --hero-h: 100svh; }
 }
 .hero-slider .slide { inset: var(--frame-top) var(--photo-side) var(--frame-bottom); }
 .hero-slider .slide img { object-fit: contain; }
@@ -479,6 +481,30 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   .hero-slider .slide { inset: 0 28px; }
   .hero-slider .slider-arrow { display: none; }
   .hero-slider .slider-dots { bottom: clamp(20px, 4vw, 36px); }
+}
+
+/* Works: same frame around the hero video, with the scroll arrow in the bottom band */
+.site-nav--framed { background: #fff; }
+.site-nav--framed .nav-toggle span { background: var(--ink); }
+.works-hero video {
+  inset: var(--frame-top) var(--photo-side) var(--frame-bottom);
+  width: calc(100% - 2 * var(--photo-side));
+  height: auto;
+  aspect-ratio: 3 / 2; /* same box as the Home photos */
+  margin: auto 0;
+}
+.works-hero::after { content: none; } /* no tint: it would gray the frame */
+.works-hero-scroll {
+  bottom: calc(var(--frame-bottom) / 2 - 18px);
+  color: var(--ink);
+}
+.works-hero-scroll svg { filter: none; }
+@media (max-width: 720px) {
+  .works-hero video {
+    inset: 0 28px;
+    width: calc(100% - 56px);
+    aspect-ratio: 16 / 9;
+  }
 }
 
 /* ============================================================
