@@ -457,12 +457,19 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   --frame-top: calc(var(--nav-h) + 16px);
   --frame-side: clamp(40px, 7vw, 120px);
   --frame-bottom: 80px;
+  --hero-h: 100vh;
+  /* side space that leaves a 3:2 box, so the whole photo shows uncropped */
+  --photo-side: max(var(--frame-side), calc(50% - (var(--hero-h) - var(--frame-top) - var(--frame-bottom)) * 0.75));
   background: #fff;
 }
-.hero-slider .slide { inset: var(--frame-top) var(--frame-side) var(--frame-bottom); }
+@supports (height: 100svh) {
+  .hero-slider { --hero-h: 100svh; }
+}
+.hero-slider .slide { inset: var(--frame-top) var(--photo-side) var(--frame-bottom); }
+.hero-slider .slide img { object-fit: contain; }
 .hero-slider .slider-arrow { top: calc(50% + (var(--frame-top) - var(--frame-bottom)) / 2); }
-.hero-slider .slider-arrow.prev { left: calc(var(--frame-side) + 8px); }
-.hero-slider .slider-arrow.next { right: calc(var(--frame-side) + 8px); }
+.hero-slider .slider-arrow.prev { left: calc(var(--photo-side) + 8px); }
+.hero-slider .slider-arrow.next { right: calc(var(--photo-side) + 8px); }
 .hero-slider .slider-dots { bottom: calc(var(--frame-bottom) / 2 - 3px); }
 .hero-slider .slider-dots button { background: rgba(21, 23, 26, 0.25); }
 .hero-slider .slider-dots button.is-active { background: var(--ink); }
