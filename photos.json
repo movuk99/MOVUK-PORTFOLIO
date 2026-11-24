@@ -6,7 +6,8 @@
     },
     {
       "src": "hero-02.jpg",
-      "alt": "Black and white view of the Shanghai skyline across the river"
+      "alt": "Black and white view of the Shanghai skyline across the river",
+      "bw": true
     },
     {
       "src": "hero-04.jpg",
@@ -14,7 +15,8 @@
     },
     {
       "src": "hero-05.jpg",
-      "alt": "Black and white photo of two Maasai men walking with sticks across a misty valley, Tanzania"
+      "alt": "Black and white photo of two Maasai men walking with sticks across a misty valley, Tanzania",
+      "bw": true
     },
     {
       "src": "hero-06.jpg",
@@ -30,7 +32,8 @@
     },
     {
       "src": "hero-12.jpg",
-      "alt": "Black and white photo of climbers resting on a snowy mountain summit ridge"
+      "alt": "Black and white photo of climbers resting on a snowy mountain summit ridge",
+      "bw": true
     },
     {
       "src": "hero-13.jpg",
@@ -42,7 +45,8 @@
     },
     {
       "src": "hero-15.jpg",
-      "alt": "Black and white view of a cable car line over a mountain valley with sun rays"
+      "alt": "Black and white view of a cable car line over a mountain valley with sun rays",
+      "bw": true
     },
     {
       "src": "hero-16.jpg",
@@ -50,7 +54,8 @@
     },
     {
       "src": "hero-17.jpg",
-      "alt": "Black and white photo of two surfers carrying their boards into the waves"
+      "alt": "Black and white photo of two surfers carrying their boards into the waves",
+      "bw": true
     }
   ],
   "categories": [

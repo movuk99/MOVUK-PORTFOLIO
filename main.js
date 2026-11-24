@@ -382,6 +382,22 @@ function shuffle(arr) {
   return arr;
 }
 
+// random hero order where two black & white photos ("bw" in photos.json) never
+// follow each other, counting the loop from the last photo back to the first
+function orderHero(photos) {
+  const color = shuffle(photos.filter(p => !p.bw));
+  const bw = shuffle(photos.filter(p => p.bw));
+  if (bw.length > color.length) return shuffle(photos.slice()); // not enough color to separate them
+  const slots = new Set(shuffle(color.map((_, i) => i)).slice(0, bw.length));
+  const order = [];
+  color.forEach((p, i) => {
+    order.push(p);
+    if (slots.has(i)) order.push(bw.pop());
+  });
+  const start = Math.floor(Math.random() * order.length);
+  return order.slice(start).concat(order.slice(0, start));
+}
+
 function waitForImages() {
   const imgs = Array.from(document.images);
   return Promise.all(imgs.map(img => {
@@ -438,7 +454,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     tasks.push(
       fetch('photos.json')
         .then(r => r.json())
-        .then(data => initSlider(heroSlider, shuffle(data.hero.slice())))
+        .then(data => initSlider(heroSlider, orderHero(data.hero)))
     );
   }
 
