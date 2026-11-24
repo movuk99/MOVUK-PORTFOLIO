@@ -11,9 +11,30 @@ function initNav() {
     const open = links.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open);
   });
-  links.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => links.classList.remove('is-open'))
-  );
+}
+
+// ---- page links: let the grow + underline motion play before leaving ----
+function initLinkMotion() {
+  const PRESS_MS = 280; // a touch longer than the 0.25s CSS transition
+  const pageLinks = document.querySelectorAll('.nav-links a, .hero-links a');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  pageLinks.forEach(a => a.addEventListener('click', (e) => {
+    if (calm || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    if (document.querySelector('a.is-pressed')) return; // already leaving
+    a.classList.add('is-pressed');
+    setTimeout(() => { window.location.href = a.href; }, PRESS_MS);
+  }));
+
+  // coming back with the browser's back button: start clean
+  window.addEventListener('pageshow', () => {
+    pageLinks.forEach(a => a.classList.remove('is-pressed'));
+    const menu = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.nav-toggle');
+    if (menu) menu.classList.remove('is-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
 }
 
 // ---- lightbox (supports a single image OR a folder slideshow) ----
@@ -443,6 +464,7 @@ function hidePageLoader() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   initNav();
+  initLinkMotion();
   initReducedMotionVideo();
   const lightbox = buildLightbox();
 

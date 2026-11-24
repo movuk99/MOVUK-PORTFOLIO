@@ -181,8 +181,17 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
 
 .nav-links a {
   position: relative;
+  display: inline-block; /* so the link can scale */
   padding-bottom: 4px;
+  margin-bottom: -4px;
   color: var(--coral);
+  transition: transform 0.25s ease;
+}
+.nav-links a:active,
+.nav-links a:focus-visible,
+.nav-links a.is-pressed { transform: scale(1.12); }
+@media (hover: hover) {
+  .nav-links a:hover { transform: scale(1.12); }
 }
 .nav-links a::after {
   content: "";
@@ -193,6 +202,9 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   transition: width 0.25s ease;
 }
 .nav-links a:hover::after,
+.nav-links a:active::after,
+.nav-links a:focus-visible::after,
+.nav-links a.is-pressed::after,
 .nav-links a[aria-current="page"]::after { width: 100%; }
 
 .nav-toggle {
@@ -237,11 +249,22 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
   }
   .nav-links a {
     display: block;
+    margin-bottom: 0;
     padding: 16px 0;
     border-bottom: 1px solid var(--line);
     font-size: 14px;
+    line-height: 21px;
     color: var(--ink);
+    transition: font-size 0.25s ease;
   }
+  /* full-width rows: grow the text itself so the row never overflows */
+  .nav-links a:hover,
+  .nav-links a:active,
+  .nav-links a:focus-visible,
+  .nav-links a.is-pressed { transform: none; }
+  .nav-links a:active,
+  .nav-links a:focus-visible,
+  .nav-links a.is-pressed { font-size: 16px; }
 }
 
 /* Home on phones: light background, no burger or arrows, page links over the hero photo */
@@ -266,12 +289,27 @@ body:has(#page-loader:not(.is-hidden)) { overflow: hidden; }
     line-height: 1.25;
   }
   .hero-links a {
+    position: relative;
+    padding-bottom: 2px;
     color: var(--coral);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    transform-origin: right center; /* grows inward, away from the screen edge */
+    transition: transform 0.25s ease;
   }
+  .hero-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--coral);
+    transition: width 0.25s ease;
+  }
+  .hero-links a:active,
+  .hero-links a:focus-visible,
+  .hero-links a.is-pressed { transform: scale(1.12); }
+  .hero-links a:active::after,
+  .hero-links a:focus-visible::after,
+  .hero-links a.is-pressed::after { width: 100%; }
 }
 
 /* ============================================================
